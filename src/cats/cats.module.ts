@@ -4,14 +4,14 @@ import { CatsService } from './cats.service';
 import { LoggerMiddleware } from '../logger.middleware';
 
 @Module({
-  controllers: [CatsController],
-  providers: [CatsService],
-  exports: [CatsService],
+    controllers: [CatsController],
+    providers: [CatsService],
+    exports: [CatsService],
 })
 export class CatsModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(LoggerMiddleware)
-      .forRoutes(CatsController);
-  }
+    configure(consumer: MiddlewareConsumer) {
+        consumer
+            .apply(LoggerMiddleware)
+            .forRoutes(CatsController);
+    }
 }
