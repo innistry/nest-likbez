@@ -12,3 +12,9 @@ services:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: pass
       POSTGRES_DB: db
+
+  mongo:
+    image: mongo:latest
+    restart: unless-stopped
+    ports:
+      - 27017:27017
