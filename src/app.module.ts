@@ -8,6 +8,7 @@ import { PhotoModule } from './photo/photo.module';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ArticlesModule } from './articles/articles.module';
+import { ConfigModule } from './config/config.module';
 
 @Module({
     imports: [
@@ -33,6 +34,7 @@ import { ArticlesModule } from './articles/articles.module';
         PhotoModule,
         ArticlesModule,
         ArticlesModule,
+        ConfigModule,
     ],
     controllers: [AppController],
     providers: [AppService],

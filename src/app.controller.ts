@@ -6,6 +6,7 @@ import { ApiBearerAuth, ApiImplicitBody, ApiImplicitFile, ApiResponse, ApiUnauth
 import { AuthService } from './auth/auth.service';
 import { WithTime } from './logging.interceptor';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { ConfigService } from './config/config.service';
 
 @Controller()
 @ApiUseTags('general')
@@ -13,7 +14,12 @@ export class AppController {
     constructor(
         private readonly appService: AppService,
         private readonly authService: AuthService,
-    ) {}
+        config: ConfigService,
+    ) {
+        if (config.isApiAuthEnabled) {
+            Logger.debug(`Authorization is enabled`);
+        }
+    }
 
     @UseGuards(AuthGuard('local'))
     @ApiUnauthorizedResponse({ description: 'Unauthorized' })
