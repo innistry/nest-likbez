@@ -1,5 +1,4 @@
-import { CacheInterceptor, Controller, Get, Logger, Post, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
-import { AppService } from './app.service';
+import { CacheInterceptor, Controller, Get, Logger, Post, Render, Res, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { User } from '../dist/cats/cat.decorator';
 import { ApiBearerAuth, ApiImplicitBody, ApiImplicitFile, ApiResponse, ApiUnauthorizedResponse, ApiUseTags } from '@nestjs/swagger';
@@ -7,12 +6,12 @@ import { AuthService } from './auth/auth.service';
 import { WithTime } from './logging.interceptor';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ConfigService } from './config/config.service';
+import { Response } from 'express';
 
 @Controller()
 @ApiUseTags('general')
 export class AppController {
     constructor(
-        private readonly appService: AppService,
         private readonly authService: AuthService,
         config: ConfigService,
     ) {
@@ -44,11 +43,6 @@ export class AppController {
         return user;
     }
 
-    @Get()
-    getHello(): string {
-        return this.appService.getHello();
-    }
-
     @Post('upload-file')
     @UseInterceptors(FileInterceptor('file'))
     @ApiImplicitFile({ name: 'file', description: 'File for avatar' })
@@ -60,5 +54,21 @@ export class AppController {
     @UseInterceptors(CacheInterceptor)
     cachedTime(): string {
         return new Date().toLocaleTimeString();
+    }
+
+    /**
+     * Alternative
+     */
+    // @Get()
+    // @Render('index')
+    // root() {
+    //     return { message: 'Hello world!' };
+    // }
+    @Get()
+    root(@Res() res: Response) {
+        return res.render(
+            'index',
+            { message: 'Hello world!' },
+        );
     }
 }

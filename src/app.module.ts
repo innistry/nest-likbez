@@ -1,6 +1,5 @@
 import { CacheModule, Module } from '@nestjs/common';
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { CatsModule } from './cats/cats.module';
 import { AuthModule } from './auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -37,6 +36,5 @@ import { ConfigModule } from './config/config.module';
         ConfigModule,
     ],
     controllers: [AppController],
-    providers: [AppService],
 })
 export class AppModule {}
