@@ -10,14 +10,14 @@ export class CatsService {
         return cat;
     }
 
-    findAll(): Cat[] {
+    findAll(): [Cat[], number] {
         if (!this.cats.length) {
             throw new NotFoundException();
         }
-        return this.cats;
+        return [this.cats, this.cats.length];
     }
 
-    findByAge(age: number): Cat[] {
+    findByAge(age: number): [Cat[], number] {
         if (!this.cats.length) {
             throw new NotFoundException();
         }
@@ -28,6 +28,6 @@ export class CatsService {
             throw new NotFoundException();
         }
 
-        return searchedCats;
+        return [searchedCats, searchedCats.length];
     }
 }

@@ -1,10 +1,11 @@
-import { Controller, Get, Post, Body, Param, ParseIntPipe, UseGuards, UseInterceptors } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, ParseIntPipe, UseGuards, UseInterceptors, ClassSerializerInterceptor } from '@nestjs/common';
 import { CreateCatDto } from './dto/create-cat.dto';
 import { CatsService } from './cats.service';
-import { Cat } from './interfaces/cat.interface';
 import { Roles, RolesGuard } from '../roles.guard';
 import { WithTime } from '../logging.interceptor';
 import { ApiForbiddenResponse, ApiNotFoundResponse, ApiResponse, ApiUseTags } from '@nestjs/swagger';
+import { CatDto } from './dto/cat.dto';
+import { ListDto } from './dto/list.dto';
 
 @Controller('cats')
 @UseGuards(RolesGuard)
@@ -15,20 +16,32 @@ export class CatsController {
 
     @Post()
     @Roles('admin')
-    @ApiResponse({ status: 201, description: 'The record has been successfully created.', type: Cat})
+    @UseInterceptors(ClassSerializerInterceptor)
+    @ApiResponse({ status: 201, description: 'The record has been successfully created.', type: CatDto})
     @ApiForbiddenResponse({ description: 'Only admins allowed.' })
-    async create(@Body() createCatDto: CreateCatDto): Promise<Cat> {
-        return this.catsService.create(createCatDto);
+    async create(@Body() createCatDto: CreateCatDto): Promise<CatDto> {
+        const cat = this.catsService.create(createCatDto);
+        return new CatDto(cat);
     }
 
     @Get()
-    async findAll(): Promise<Cat[]> {
-        return this.catsService.findAll();
+    @ApiResponse({ status: 200, type: ListDto})
+    async findAll(): Promise<ListDto<CatDto>> {
+        const [cats, count] = this.catsService.findAll();
+        return {
+            items: cats.map(item => new CatDto(item)),
+            count,
+        };
     }
 
     @Get(':age')
     @ApiNotFoundResponse({ description: 'Not found such cats.' })
-    async findByAge(@Param('age', new ParseIntPipe()) id): Promise<Cat[]> {
-        return this.catsService.findByAge(id);
+    @ApiResponse({ status: 200, type: ListDto})
+    async findByAge(@Param('age', new ParseIntPipe()) id): Promise<ListDto<CatDto>> {
+        const [cats, count] = this.catsService.findByAge(id);
+        return {
+            items: cats.map(item => new CatDto(item)),
+            count,
+        };
     }
 }
