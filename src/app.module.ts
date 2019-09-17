@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { CacheModule, Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CatsModule } from './cats/cats.module';
@@ -24,6 +24,10 @@ import { ArticlesModule } from './articles/articles.module';
             namingStrategy: new SnakeNamingStrategy(),
         }),
         MongooseModule.forRoot('mongodb://localhost:27017/mongo'),
+        CacheModule.register({
+            ttl: 5, // seconds
+            max: 10, // maximum number of items in cache
+        }),
         CatsModule,
         AuthModule,
         PhotoModule,
@@ -34,4 +38,3 @@ import { ArticlesModule } from './articles/articles.module';
     providers: [AppService],
 })
 export class AppModule {}
-

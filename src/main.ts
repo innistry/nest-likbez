@@ -8,7 +8,9 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
     const app = await NestFactory.create(AppModule);
 
     app.use(helmet());
-    app.useGlobalPipes(new ValidationPipe());
+    app.useGlobalPipes(new ValidationPipe({
+        transform: true,
+    }));
 
     const options = new DocumentBuilder()
         .setTitle('Cats example')

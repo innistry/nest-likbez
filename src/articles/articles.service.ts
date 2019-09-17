@@ -16,7 +16,6 @@ export class ArticlesService {
 
     async create(createArticleDto: CreateArticleDto): Promise<Article> {
         const article = new this.articleModel(createArticleDto);
-        console.log('article', article)
         return article.save();
     }
 

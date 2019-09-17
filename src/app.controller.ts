@@ -1,4 +1,4 @@
-import { Controller, Get, Logger, Post, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
+import { CacheInterceptor, Controller, Get, Logger, Post, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
 import { AppService } from './app.service';
 import { AuthGuard } from '@nestjs/passport';
 import { User } from '../dist/cats/cat.decorator';
@@ -48,5 +48,11 @@ export class AppController {
     @ApiImplicitFile({ name: 'file', description: 'File for avatar' })
     uploadFile(@UploadedFile() file) {
         Logger.log(`File is uploaded`);
+    }
+
+    @Get('cached-time')
+    @UseInterceptors(CacheInterceptor)
+    cachedTime(): string {
+        return new Date().toLocaleTimeString();
     }
 }
