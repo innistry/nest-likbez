@@ -23,7 +23,7 @@ import { ArticlesModule } from './articles/articles.module';
             logging: true,
             namingStrategy: new SnakeNamingStrategy(),
         }),
-        MongooseModule.forRoot('mongodb://localhost:27017/nest-likbez'),
+        MongooseModule.forRoot('mongodb://localhost:27017/mongo'),
         CatsModule,
         AuthModule,
         PhotoModule,

@@ -1,10 +1,11 @@
-import { Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { Controller, Get, Logger, Post, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
 import { AppService } from './app.service';
 import { AuthGuard } from '@nestjs/passport';
 import { User } from '../dist/cats/cat.decorator';
-import { ApiBearerAuth, ApiImplicitBody, ApiResponse, ApiUnauthorizedResponse, ApiUseTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiImplicitBody, ApiImplicitFile, ApiResponse, ApiUnauthorizedResponse, ApiUseTags } from '@nestjs/swagger';
 import { AuthService } from './auth/auth.service';
 import { WithTime } from './logging.interceptor';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller()
 @ApiUseTags('general')
@@ -40,5 +41,12 @@ export class AppController {
     @Get()
     getHello(): string {
         return this.appService.getHello();
+    }
+
+    @Post('upload-file')
+    @UseInterceptors(FileInterceptor('file'))
+    @ApiImplicitFile({ name: 'file', description: 'File for avatar' })
+    uploadFile(@UploadedFile() file) {
+        Logger.log(`File is uploaded`);
     }
 }
