@@ -8,6 +8,8 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
 
+declare const module: any;
+
 (async () => {
     const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
@@ -39,4 +41,9 @@ import { join } from 'path';
 
     await app.listen(55555);
     Logger.log(`Server up at http://localhost:55555 port`);
+
+    if (module.hot) {
+        module.hot.accept();
+        module.hot.dispose(() => app.close());
+    }
 })();
