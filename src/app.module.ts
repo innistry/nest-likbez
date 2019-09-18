@@ -8,6 +8,7 @@ import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ArticlesModule } from './articles/articles.module';
 import { ConfigModule } from './config/config.module';
+import { EventsModule } from './events/events.module';
 
 @Module({
     imports: [
@@ -34,6 +35,7 @@ import { ConfigModule } from './config/config.module';
         ArticlesModule,
         ArticlesModule,
         ConfigModule,
+        EventsModule,
     ],
     controllers: [AppController],
 })

@@ -3,6 +3,27 @@
 <head>
     <meta charset="utf-8" />
     <title>App</title>
+    <script src="socket.io.js"></script>
+    <script>
+        const socket = io('http://localhost:55555');
+        socket.on('connect', () => {
+            console.log('Connected');
+            socket.emit('events', { test: 'test' });
+            socket.emit('identity', { id: 1 }, response =>
+                    console.log('Identity:', response),
+            );
+            socket.emit('exception');
+        });
+        socket.on('events', function(data) {
+            console.log('event', data);
+        });
+        socket.on('exception', function(data) {
+            console.log('exception', data);
+        });
+        socket.on('disconnect', function() {
+            console.log('Disconnected');
+        });
+    </script>
 </head>
 <body>
 {{ message }}
