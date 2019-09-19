@@ -155,6 +155,15 @@
     "@types/jsonwebtoken" "7.2.8"
     jsonwebtoken "8.4.0"
 
+"@nestjs/microservices@^6.7.1":
+  version "6.7.1"
+  resolved "https://registry.yarnpkg.com/@nestjs/microservices/-/microservices-6.7.1.tgz#e78de097c184f4631466710a3720619fed6c9472"
+  integrity sha512-jSGFo8GbPcd9nB+8fLukg6/F20Q5YHruoFF3tmIBhhFIq/TBZ1nzBacnHYVNXlBmJWOuSJB55/41IuLiC3cR7A==
+  dependencies:
+    iterare "1.2.0"
+    json-socket "0.3.0"
+    optional "0.1.4"
+
 "@nestjs/mongoose@^6.1.2":
   version "6.1.2"
   resolved "https://registry.yarnpkg.com/@nestjs/mongoose/-/mongoose-6.1.2.tgz#fe1c227f5c1fd0f5c9be5c4e37b2897f744bc0b0"
@@ -2484,6 +2493,11 @@ dotenv@^8.1.0:
   version "8.1.0"
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.1.0.tgz#d811e178652bfb8a1e593c6dd704ec7e90d85ea2"
   integrity sha512-GUE3gqcDCaMltj2++g6bRQ5rBJWtkWTmqmD0fo1RnnMuUqHNCt2oTPeDnS9n6fKYvlhn7AeBkb38lymBtWBQdA==
+
+double-ended-queue@^2.1.0-0:
+  version "2.1.0-0"
+  resolved "https://registry.yarnpkg.com/double-ended-queue/-/double-ended-queue-2.1.0-0.tgz#103d3527fd31528f40188130c841efdd78264e5c"
+  integrity sha1-ED01J/0xUo9AGIEwyEHv3XgmTlw=
 
 duplexer2@~0.1.4:
   version "0.1.4"
@@ -4970,6 +4984,11 @@ json-schema@0.2.3:
   resolved "https://registry.yarnpkg.com/json-schema/-/json-schema-0.2.3.tgz#b480c892e59a2f05954ce727bd3f2a4e882f9e13"
   integrity sha1-tIDIkuWaLwWVTOcnvT8qTogvnhM=
 
+json-socket@0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/json-socket/-/json-socket-0.3.0.tgz#f4b953c685bb8e8bd0b72438f5208d9a0799ae07"
+  integrity sha512-jc8ZbUnYIWdxERFWQKVgwSLkGSe+kyzvmYxwNaRgx/c8NNyuHes4UHnPM3LUrAFXUx1BhNJ94n1h/KCRlbvV0g==
+
 json-stringify-safe@~5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/json-stringify-safe/-/json-stringify-safe-5.0.1.tgz#1296a2d58fd45f19a0f6ce01d65701e2c735b6eb"
@@ -6975,6 +6994,25 @@ realpath-native@^1.0.0:
   integrity sha512-wlgPA6cCIIg9gKz0fgAPjnzh4yR/LnXovwuo9hvyGvx3h8nX4+/iLZplfUWasXpqD8BdnGnP5njOFjkUwPzvjA==
   dependencies:
     util.promisify "^1.0.0"
+
+redis-commands@^1.2.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/redis-commands/-/redis-commands-1.5.0.tgz#80d2e20698fe688f227127ff9e5164a7dd17e785"
+  integrity sha512-6KxamqpZ468MeQC3bkWmCB1fp56XL64D4Kf0zJSwDZbVLLm7KFkoIcHrgRvQ+sk8dnhySs7+yBg94yIkAK7aJg==
+
+redis-parser@^2.6.0:
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/redis-parser/-/redis-parser-2.6.0.tgz#52ed09dacac108f1a631c07e9b69941e7a19504b"
+  integrity sha1-Uu0J2srBCPGmMcB+m2mUHnoZUEs=
+
+redis@^2.8.0:
+  version "2.8.0"
+  resolved "https://registry.yarnpkg.com/redis/-/redis-2.8.0.tgz#202288e3f58c49f6079d97af7a10e1303ae14b02"
+  integrity sha512-M1OkonEQwtRmZv4tEWF2VgpG0JWJ8Fv1PhlgT5+B+uNq2cA3Rt1Yt/ryoR+vQNOQcIEgdCdfH0jr3bDpihAw1A==
+  dependencies:
+    double-ended-queue "^2.1.0-0"
+    redis-commands "^1.2.0"
+    redis-parser "^2.6.0"
 
 referrer-policy@1.2.0:
   version "1.2.0"

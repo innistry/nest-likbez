@@ -7,6 +7,7 @@ import { Logger, ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
+import { Transport } from '@nestjs/microservices';
 
 declare const module: any;
 
@@ -39,8 +40,19 @@ declare const module: any;
     const document = SwaggerModule.createDocument(app, options);
     SwaggerModule.setup('swagger', app, document);
 
+    app.connectMicroservice({
+        transport: Transport.REDIS,
+        options: {
+            retryAttempts: 5,
+            retryDelay: 3000,
+            url: 'redis://localhost:6379',
+        },
+    });
+    await app.startAllMicroservicesAsync();
+
     await app.listen(55555);
     Logger.log(`Server up at http://localhost:55555 port`);
+    Logger.log('MicroServices is listening');
 
     if (module.hot) {
         module.hot.accept();

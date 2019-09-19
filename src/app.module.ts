@@ -9,13 +9,14 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ArticlesModule } from './articles/articles.module';
 import { ConfigModule } from './config/config.module';
 import { EventsModule } from './events/events.module';
+import { MathModule } from './math/math.module';
 
 @Module({
     imports: [
         TypeOrmModule.forRoot({
             type: 'postgres',
             host: 'localhost',
-            port: 4321,
+            port: 5432,
             username: 'user',
             password: 'pass',
             database: 'db',
@@ -36,6 +37,7 @@ import { EventsModule } from './events/events.module';
         ArticlesModule,
         ConfigModule,
         EventsModule,
+        MathModule,
     ],
     controllers: [AppController],
 })

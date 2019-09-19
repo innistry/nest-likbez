@@ -5,12 +5,25 @@ services:
   postgres:
     image: postgres:latest
     ports:
-      - 4321:5432
+      - 5432:5432
     restart: unless-stopped
     environment:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: pass
       POSTGRES_DB: db
+    networks:
+      - net
+
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: user@mail.com
+      PGADMIN_DEFAULT_PASSWORD: pass
+    ports:
+      - 5050:80
+    networks:
+      - net
 
   mongo:
     image: mongo:latest
@@ -20,7 +33,7 @@ services:
     networks:
       - net
 
-  mongo-gui:
+  mongo-express:
     image: mongo-express
     restart: unless-stopped
     ports:
@@ -41,11 +54,11 @@ services:
     networks:
       - net
 
-  redis-gui:
+  phpredisadmin:
     image: erikdubbelboer/phpredisadmin
     restart: unless-stopped
     ports:
-      - 6380:80
+      - 8082:80
     environment:
       REDIS_1_HOST: redis
       REDIS_1_PORT: 6379
