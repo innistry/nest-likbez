@@ -1,6 +1,6 @@
 import { Controller, Inject, Logger, Post, UsePipes, ValidationPipe } from '@nestjs/common';
 import { ClientProxy, EventPattern, MessagePattern } from '@nestjs/microservices';
-import { WithTime } from '../logging.interceptor';
+import { WithTime } from '../../interceptors/logging.interceptor';
 import { MATH_SERVICE } from './math.constants';
 import { Observable } from 'rxjs';
 import { ApiUseTags } from '@nestjs/swagger';

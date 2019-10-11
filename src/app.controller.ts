@@ -2,10 +2,10 @@ import { CacheInterceptor, Controller, Get, Logger, Post, Render, Res, UploadedF
 import { AuthGuard } from '@nestjs/passport';
 import { User } from '../dist/cats/cat.decorator';
 import { ApiBearerAuth, ApiImplicitBody, ApiImplicitFile, ApiResponse, ApiUnauthorizedResponse, ApiUseTags } from '@nestjs/swagger';
-import { AuthService } from './auth/auth.service';
-import { WithTime } from './logging.interceptor';
+import { AuthService } from './modules/auth/auth.service';
+import { WithTime } from './interceptors/logging.interceptor';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { ConfigService } from './config/config.service';
+import { ConfigService } from './modules/config/config.service';
 import { Response } from 'express';
 
 @Controller()

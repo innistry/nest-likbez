@@ -15,16 +15,16 @@ declare const module: any;
     const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
     app.use(helmet());
-    app.useGlobalPipes(new ValidationPipe({
-        transform: true,
-    }));
+    // app.useGlobalPipes(new ValidationPipe({
+    //     transform: true,
+    // }));
     app.enableCors();
-    app.use(
-        rateLimit({
-            windowMs: 15 * 60 * 1000, // 15 minutes
-            max: 100, // limit each IP to 100 requests per windowMs
-        }),
-    );
+    // app.use(
+    //     rateLimit({
+    //         windowMs: 15 * 60 * 1000, // 15 minutes
+    //         max: 100, // limit each IP to 100 requests per windowMs
+    //     }),
+    // );
     app.use(compression());
 
     app.useStaticAssets(join(__dirname, '..', 'public'));
@@ -37,7 +37,10 @@ declare const module: any;
         .setVersion('1.0')
         .addBearerAuth()
         .build();
-    const document = SwaggerModule.createDocument(app, options);
+    const document = SwaggerModule.createDocument(app, options, {
+        include: [ AppModule ],
+        deepScanRoutes: true,
+    });
     SwaggerModule.setup('swagger', app, document);
 
     app.connectMicroservice({
@@ -51,8 +54,8 @@ declare const module: any;
     await app.startAllMicroservicesAsync();
 
     await app.listen(55555);
-    Logger.log(`Server up at http://localhost:55555 port`);
-    Logger.log('MicroServices is listening');
+    Logger.log(`http://localhost:55555/swagger`);
+    Logger.log(`http://localhost:55555/graphql`);
 
     if (module.hot) {
         module.hot.accept();

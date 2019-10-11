@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators';
 import { Client, Server } from 'socket.io';
 import { UsePipes, ValidationPipe } from '@nestjs/common';
 import { IdentityDto } from './dto/identity';
-import { WithTime } from '../logging.interceptor';
+import { WithTime } from '../../interceptors/logging.interceptor';
 
 @WebSocketGateway()
 export class EventsGateway {
