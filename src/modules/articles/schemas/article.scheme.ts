@@ -1,6 +1,6 @@
-import { Document, Schema} from 'mongoose';
-import * as mongoose from 'mongoose';
 import { ApiModelProperty } from '@nestjs/swagger';
+import { Document, Schema } from 'mongoose';
+import * as mongoose from 'mongoose';
 
 export class Article extends Document {
     @ApiModelProperty()

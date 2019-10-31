@@ -1,13 +1,13 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
-import * as helmet from 'helmet';
-import * as rateLimit from 'express-rate-limit';
-import * as compression from 'compression';
 import { Logger, ValidationPipe } from '@nestjs/common';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { NestExpressApplication } from '@nestjs/platform-express';
-import { join } from 'path';
+import { NestFactory } from '@nestjs/core';
 import { Transport } from '@nestjs/microservices';
+import { NestExpressApplication } from '@nestjs/platform-express';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import * as compression from 'compression';
+import * as rateLimit from 'express-rate-limit';
+import * as helmet from 'helmet';
+import { join } from 'path';
+import { AppModule } from './app.module';
 
 declare const module: any;
 
@@ -38,7 +38,7 @@ declare const module: any;
         .addBearerAuth()
         .build();
     const document = SwaggerModule.createDocument(app, options, {
-        include: [ AppModule ],
+        include: [AppModule],
         deepScanRoutes: true,
     });
     SwaggerModule.setup('swagger', app, document);

@@ -1,6 +1,6 @@
 import { ApiModelProperty } from '@nestjs/swagger';
-import { ListDto } from './list.dto';
 import { CatDto } from './cat.dto';
+import { ListDto } from './list.dto';
 
 export class CatsDto extends ListDto<CatDto> {
     @ApiModelProperty({

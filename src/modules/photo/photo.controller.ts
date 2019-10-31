@@ -1,7 +1,7 @@
 import { Body, Controller, Get, HttpCode, Post } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiUseTags } from '@nestjs/swagger';
-import { PhotoDto } from './dto/photo.dto';
 import { CreatePhotoDto } from './dto/create-photo.dto';
+import { PhotoDto } from './dto/photo.dto';
 import { PhotoService } from './photo.service';
 
 @Controller('photos')

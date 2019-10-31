@@ -1,4 +1,4 @@
-import {ApiModelProperty} from '@nestjs/swagger';
+import { ApiModelProperty } from '@nestjs/swagger';
 import { PhotoMetadata } from '../photo-metadata.entity';
 
 export class PhotoMetadataDto {

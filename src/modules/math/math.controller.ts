@@ -1,9 +1,9 @@
 import { Controller, Inject, Logger, Post, UsePipes, ValidationPipe } from '@nestjs/common';
 import { ClientProxy, EventPattern, MessagePattern } from '@nestjs/microservices';
+import { ApiUseTags } from '@nestjs/swagger';
+import { Observable } from 'rxjs';
 import { WithTime } from '../../interceptors/logging.interceptor';
 import { MATH_SERVICE } from './math.constants';
-import { Observable } from 'rxjs';
-import { ApiUseTags } from '@nestjs/swagger';
 
 @Controller('math')
 @ApiUseTags('math')
@@ -12,15 +12,9 @@ export class MathController {
 
     @Post('microservice')
     execute(): Observable<number> {
-        this.client.emit<number>(
-            'accumulateEvent',
-            [1, 2, 3, 4, 5],
-        );
+        this.client.emit<number>('accumulateEvent', [1, 2, 3, 4, 5]);
 
-        return this.client.send<number>(
-            'accumulateMessage',
-            [1, 2, 3, 4, 5],
-        );
+        return this.client.send<number>('accumulateMessage', [1, 2, 3, 4, 5]);
     }
 
     @MessagePattern('accumulateMessage')

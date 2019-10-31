@@ -1,6 +1,6 @@
 import * as dotenv from 'dotenv';
-import * as Joi from 'joi';
 import * as fs from 'fs';
+import * as Joi from 'joi';
 
 export interface EnvConfig {
     [key: string]: string;
@@ -31,10 +31,7 @@ export class ConfigService {
             API_AUTH_ENABLED: Joi.boolean().required(),
         });
 
-        const { error, value: validatedEnvConfig } = Joi.validate(
-            envConfig,
-            envVarsSchema,
-        );
+        const { error, value: validatedEnvConfig } = Joi.validate(envConfig, envVarsSchema);
         if (error) {
             throw new Error(`Config validation error: ${error.message}`);
         }

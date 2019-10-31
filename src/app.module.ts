@@ -1,17 +1,17 @@
 import { CacheModule, Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { CatsModule } from './modules/cats/cats.module';
-import { AuthModule } from './modules/auth/auth.module';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { PhotoModule } from './modules/photo/photo.module';
-import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
+import { GraphQLModule } from '@nestjs/graphql';
 import { MongooseModule } from '@nestjs/mongoose';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
+import { AppController } from './app.controller';
 import { ArticlesModule } from './modules/articles/articles.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { AuthorsModule } from './modules/authors/authors.module';
+import { CatsModule } from './modules/cats/cats.module';
 import { ConfigModule } from './modules/config/config.module';
 import { EventsModule } from './modules/events/events.module';
 import { MathModule } from './modules/math/math.module';
-import { GraphQLModule } from '@nestjs/graphql';
-import { AuthorsModule } from './modules/authors/authors.module';
+import { PhotoModule } from './modules/photo/photo.module';
 
 @Module({
     imports: [

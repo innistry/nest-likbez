@@ -1,15 +1,10 @@
-import {
-    SubscribeMessage,
-    WebSocketGateway,
-    WebSocketServer, WsException,
-    WsResponse,
-} from '@nestjs/websockets';
+import { UsePipes, ValidationPipe } from '@nestjs/common';
+import { SubscribeMessage, WebSocketGateway, WebSocketServer, WsException, WsResponse } from '@nestjs/websockets';
 import { from, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Client, Server } from 'socket.io';
-import { UsePipes, ValidationPipe } from '@nestjs/common';
-import { IdentityDto } from './dto/identity';
+import { Client, Server, Socket } from 'socket.io';
 import { WithTime } from '../../interceptors/logging.interceptor';
+import { IdentityDto } from './dto/identity';
 
 @WebSocketGateway()
 export class EventsGateway {

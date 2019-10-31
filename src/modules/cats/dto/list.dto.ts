@@ -1,6 +1,6 @@
 import { ApiModelProperty } from '@nestjs/swagger';
 
-export class ListDto <T> {
+export class ListDto<T> {
     @ApiModelProperty({
         type: [Object],
     })
