@@ -1,5 +1,5 @@
-import { UsePipes, ValidationPipe } from '@nestjs/common';
-import { SubscribeMessage, WebSocketGateway, WebSocketServer, WsException, WsResponse } from '@nestjs/websockets';
+import { UnauthorizedException, UsePipes, ValidationPipe } from '@nestjs/common';
+import { OnGatewayConnection, SubscribeMessage, WebSocketGateway, WebSocketServer, WsException, WsResponse } from '@nestjs/websockets';
 import { from, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Client, Server, Socket } from 'socket.io';
@@ -7,9 +7,15 @@ import { WithTime } from '../../interceptors/logging.interceptor';
 import { IdentityDto } from './dto/identity';
 
 @WebSocketGateway()
-export class EventsGateway {
+export class EventsGateway implements OnGatewayConnection {
     @WebSocketServer()
     server: Server;
+
+    handleConnection(client: Socket, data: any) {
+        // console.log('client', client);
+        client.emit('exception', new UnauthorizedException());
+        client.disconnect();
+    }
 
     @SubscribeMessage('events')
     findAll(client: Client, data: any): Observable<WsResponse<number>> {

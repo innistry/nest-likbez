@@ -5,7 +5,11 @@
     <title>App</title>
     <script src="socket.io.js"></script>
     <script>
-        const socket = io('http://localhost:55555');
+        const socket = io('http://localhost:55555', {
+            extraHeaders: {
+                Authorization: "Bearer authorization_token_here"
+            }
+        });
         socket.on('connect', () => {
             console.log('Connected');
             socket.emit('events', { test: 'test' });
