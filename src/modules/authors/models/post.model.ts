@@ -5,9 +5,12 @@ export class Post {
     @Field(() => Int)
     id: number;
 
-    @Field()
+    @Field(() => String)
     title: string;
 
-    @Field(() => Int, { nullable: true })
-    votes?: number;
+    @Field(() => Int)
+    votes: number;
+
+    @Field({ nullable: true })
+    creationDate?: Date;
 }

@@ -16,7 +16,9 @@ import { PhotoModule } from './modules/photo/photo.module';
 @Module({
     imports: [
         GraphQLModule.forRoot({
+            debug: true,
             autoSchemaFile: 'schema.gql',
+            installSubscriptionHandlers: true,
         }),
         TypeOrmModule.forRoot({
             type: 'postgres',

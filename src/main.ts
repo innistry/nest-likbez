@@ -15,16 +15,18 @@ declare const module: any;
     const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
     app.use(helmet());
-    // app.useGlobalPipes(new ValidationPipe({
-    //     transform: true,
-    // }));
+    app.useGlobalPipes(
+        new ValidationPipe({
+            transform: true,
+        }),
+    );
     app.enableCors();
-    // app.use(
-    //     rateLimit({
-    //         windowMs: 15 * 60 * 1000, // 15 minutes
-    //         max: 100, // limit each IP to 100 requests per windowMs
-    //     }),
-    // );
+    app.use(
+        rateLimit({
+            windowMs: 15 * 60 * 1000, // 15 minutes
+            max: 100, // limit each IP to 100 requests per windowMs
+        }),
+    );
     app.use(compression());
 
     app.useStaticAssets(join(__dirname, '..', 'public'));
@@ -54,6 +56,7 @@ declare const module: any;
     await app.startAllMicroservicesAsync();
 
     await app.listen(55555);
+    Logger.log(`http://localhost:55555/`);
     Logger.log(`http://localhost:55555/swagger`);
     Logger.log(`http://localhost:55555/graphql`);
 
